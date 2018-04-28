@@ -5,13 +5,17 @@ Node SDK for Networking Merchants Inc's (NMI) Three Step Redirect API
 npm install nmi-node
 ```
 
+# Documentation
+
+[View documentation](docs.md)
+
 # Notes
 
 For specific guidelines, see [NMI's Three Step Redirect API docs](https://secure.networkmerchants.com/gw/merchants/resources/integration/integration_portal.php#3step_methodology). 
 
-This library will convert `camelCase` to `hypen-case` when submitting contents to NMI. 
+For sanity, this library will convert element names from `camelCase` to `hypen-case` when submitting contents to NMI.
 
-XML will be generated using [xmlbuilder](https://github.com/oozcitak/xmlbuilder-js/wiki/Conversion-From-Object).
+Dispatched XML is generated with [xmlbuilder](https://github.com/oozcitak/xmlbuilder-js/wiki/Conversion-From-Object).
 
 # Usage
 ```

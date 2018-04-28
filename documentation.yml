@@ -1,0 +1,33 @@
+toc:
+  - name: NMI
+    children:
+     - configure
+     - request
+     - query
+  - name: Transactions
+    children:
+     - transaction.create
+     - transaction.execute
+     - transaction.update
+     - transaction.capture
+     - transaction.void
+     - transaction.refund
+     - transaction.completePartialPayment
+  - name: Subscriptions
+    children:
+     - subscription.create
+     - subscription.execute
+     - subscription.update
+     - subscription.delete
+  - name: Customers
+    children:
+     - customer.create
+     - customer.execute
+     - customer.update
+     - customer.delete
+     - customer.addBilling
+     - customer.updateBilling
+     - customer.deleteBilling
+  - name: Plans
+    children:
+     - plan.create
