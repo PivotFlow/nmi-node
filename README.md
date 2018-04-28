@@ -1,0 +1,1 @@
+Node SDK for Networking Merchants Inc's (NMI) Three Step Redirect API
