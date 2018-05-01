@@ -13,7 +13,7 @@ npm install nmi-node
 
 For specific guidelines, see [NMI's Three Step Redirect API docs](https://secure.networkmerchants.com/gw/merchants/resources/integration/integration_portal.php#3step_methodology). 
 
-For sanity, this library will convert element names from `camelCase` to `hypen-case` when submitting contents to NMI.
+In order to provide a consistent expierence, all `hypen-case` and `param_case` XML elements will be converted to `camelCase`. Additionally, some fields are aliased (e.g, `postalCode` => `postal`) to provide consistent access between the Three Step and Query APIs. You can disable this completely by specifying `transform: false` in the configuration options.
 
 Dispatched XML is generated with [xmlbuilder](https://github.com/oozcitak/xmlbuilder-js/wiki/Conversion-From-Object).
 
@@ -23,11 +23,8 @@ const NMI = require('nmi-node');
 
 NMI.configure({
   apiKey: 'your-key-here',
-
-  // only required for query
   username: 'your-username',
   password: 'your-password'
-
 });
 
 // create a sale
