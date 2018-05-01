@@ -6,6 +6,7 @@ toc:
      - query
   - name: Transactions
     children:
+     - transaction.get
      - transaction.create
      - transaction.execute
      - transaction.update
@@ -15,12 +16,14 @@ toc:
      - transaction.completePartialPayment
   - name: Subscriptions
     children:
+     - subscription.get
      - subscription.create
      - subscription.execute
      - subscription.update
      - subscription.delete
   - name: Customers
     children:
+     - customer.get
      - customer.create
      - customer.execute
      - customer.update

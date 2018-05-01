@@ -7,28 +7,31 @@
     -   [request][3]
     -   [query][4]
 -   [Transactions][5]
-    -   [transaction.create][6]
-    -   [transaction.execute][7]
-    -   [transaction.update][8]
-    -   [transaction.capture][9]
-    -   [transaction.void][10]
-    -   [transaction.refund][11]
-    -   [transaction.completePartialPayment][12]
--   [Subscriptions][13]
-    -   [subscription.create][14]
-    -   [subscription.execute][15]
-    -   [subscription.update][16]
-    -   [subscription.delete][17]
--   [Customers][18]
-    -   [customer.create][19]
-    -   [customer.execute][20]
-    -   [customer.update][21]
-    -   [customer.delete][22]
-    -   [customer.addBilling][23]
-    -   [customer.updateBilling][24]
-    -   [customer.deleteBilling][25]
--   [Plans][26]
-    -   [plan.create][27]
+    -   [transaction.get][6]
+    -   [transaction.create][7]
+    -   [transaction.execute][8]
+    -   [transaction.update][9]
+    -   [transaction.capture][10]
+    -   [transaction.void][11]
+    -   [transaction.refund][12]
+    -   [transaction.completePartialPayment][13]
+-   [Subscriptions][14]
+    -   [subscription.get][15]
+    -   [subscription.create][16]
+    -   [subscription.execute][17]
+    -   [subscription.update][18]
+    -   [subscription.delete][19]
+-   [Customers][20]
+    -   [customer.get][21]
+    -   [customer.create][22]
+    -   [customer.execute][23]
+    -   [customer.update][24]
+    -   [customer.delete][25]
+    -   [customer.addBilling][26]
+    -   [customer.updateBilling][27]
+    -   [customer.deleteBilling][28]
+-   [Plans][29]
+    -   [plan.create][30]
 
 ## NMI
 
@@ -41,11 +44,12 @@ Configure NMI client
 
 **Parameters**
 
--   `options` **[Object][56]** 
-    -   `options.apiKey` **[string][57]** api key
-    -   `options.username` **[string][57]** username
-    -   `options.password` **[string][57]** password
-    -   `options.currency` **[string][57]** default currency
+-   `options` **[Object][62]** 
+    -   `options.apiKey` **[string][63]** api key
+    -   `options.username` **[string][63]** username
+    -   `options.password` **[string][63]** password
+    -   `options.transform` **bool** disable key transformations
+    -   `options.currency` **[string][63]** default currency (default USD)
 
 ### request
 
@@ -61,12 +65,23 @@ Query for data
 
 **Parameters**
 
--   `qs` **[Query][58]** query string
+-   `qs` **[Query][64]** query string
 
 ## Transactions
 
 
 
+
+### transaction.get
+
+Get a transaction
+Returns null if transaction is not found
+
+**Parameters**
+
+-   `transactionId` **[string][63]** transaction id
+
+Returns **[GetTransactionResponse][65]** 
 
 ### transaction.create
 
@@ -74,10 +89,10 @@ Create a transaction
 
 **Parameters**
 
--   `type` **[string][57]** type of 'sale', 'auth', 'credit', 'validate', or 'offline'
--   `transaction` **[Transaction][59]** transaction object
+-   `type` **[string][63]** type of 'sale', 'auth', 'credit', 'validate', or 'offline'
+-   `transaction` **[Transaction][66]** transaction object
 
-Returns **[CreateTransactionResponse][60]** 
+Returns **[CreateTransactionResponse][67]** 
 
 ### transaction.execute
 
@@ -85,9 +100,9 @@ Execture a transaction given a token
 
 **Parameters**
 
--   `token` **[string][57]** transaction token
+-   `token` **[string][63]** transaction token
 
-Returns **[ExecuteTransactionResponse][61]** 
+Returns **[ExecuteTransactionResponse][68]** 
 
 ### transaction.update
 
@@ -95,7 +110,7 @@ Update a transaction
 
 **Parameters**
 
--   `update` **[UpdateTransaction][62]** update object
+-   `update` **[UpdateTransaction][69]** update object
 
 ### transaction.capture
 
@@ -103,7 +118,7 @@ Capture a transaction
 
 **Parameters**
 
--   `capture` **[CaptureTransaction][63]** capture object
+-   `capture` **[CaptureTransaction][70]** capture object
 
 ### transaction.void
 
@@ -111,7 +126,7 @@ Void a transaction
 
 **Parameters**
 
--   `transactionId` **[string][57]** transaction id
+-   `transactionId` **[string][63]** transaction id
 
 ### transaction.refund
 
@@ -119,8 +134,8 @@ Refund a transaction
 
 **Parameters**
 
--   `transactionId` **[string][57]** transaction id
--   `amount` **([string][57] \| [number][64]?)** amount to be refunded, omit for a full refund
+-   `transactionId` **[string][63]** transaction id
+-   `amount` **([string][63] \| [number][71]?)** amount to be refunded, omit for a full refund
 
 ### transaction.completePartialPayment
 
@@ -128,12 +143,23 @@ Complete a partial payment
 
 **Parameters**
 
--   `partialPaymentId` **[string][57]** partial payment id
+-   `partialPaymentId` **[string][63]** partial payment id
 
 ## Subscriptions
 
 
 
+
+### subscription.get
+
+Get a subscription
+Returns null if subscription is not found
+
+**Parameters**
+
+-   `subscriptionId` **[string][63]** 
+
+Returns **[GetSubscriptionResponse][72]** 
 
 ### subscription.create
 
@@ -141,9 +167,9 @@ Create a subscription
 
 **Parameters**
 
--   `subscription` **[AddSubscription][65]** subscription object
+-   `subscription` **[AddSubscription][73]** subscription object
 
-Returns **[CreateSubscriptionResponse][66]** 
+Returns **[CreateSubscriptionResponse][74]** 
 
 ### subscription.execute
 
@@ -151,9 +177,9 @@ Execture a subscription given a token
 
 **Parameters**
 
--   `token` **[string][57]** subscription token
+-   `token` **[string][63]** subscription token
 
-Returns **[ExecuteSubscriptionResponse][67]** 
+Returns **[ExecuteSubscriptionResponse][75]** 
 
 ### subscription.update
 
@@ -161,7 +187,7 @@ Update a subscription
 
 **Parameters**
 
--   `subscription` **[UpdateSubscription][68]** UpdateSubscription schema
+-   `subscription` **[UpdateSubscription][76]** UpdateSubscription schema
 
 ### subscription.delete
 
@@ -169,12 +195,23 @@ Delete a subscription, customer will no longer be charged
 
 **Parameters**
 
--   `subscriptionId` **[string][57]** subscription id
+-   `subscriptionId` **[string][63]** subscription id
 
 ## Customers
 
 
 
+
+### customer.get
+
+Get a customer
+Returns null if customer is not found
+
+**Parameters**
+
+-   `customerId` **[string][63]** 
+
+Returns **[GetCustomerResponse][77]** 
 
 ### customer.create
 
@@ -182,7 +219,7 @@ Create a customer profile
 
 **Parameters**
 
--   `customer` **[AddCustomer][69]** customer object
+-   `customer` **[AddCustomer][78]** customer object
 
 ### customer.execute
 
@@ -190,9 +227,9 @@ Execture a customer given a token
 
 **Parameters**
 
--   `token` **[string][57]** subscription token
+-   `token` **[string][63]** subscription token
 
-Returns **[ExecuteCustomerResponse][70]** 
+Returns **[ExecuteCustomerResponse][79]** 
 
 ### customer.update
 
@@ -200,8 +237,8 @@ Update a customer profile
 
 **Parameters**
 
--   `customerVaultId` **[string][57]** customer vault id
--   `customer` **[UpdateCustomer][71]** customer object
+-   `customerVaultId` **[string][63]** customer vault id
+-   `customer` **[UpdateCustomer][80]** customer object
 
 ### customer.delete
 
@@ -209,7 +246,7 @@ Delete a customer profile
 
 **Parameters**
 
--   `customerId` **[string][57]** customer vault id
+-   `customerId` **[string][63]** customer vault id
 
 ### customer.addBilling
 
@@ -217,9 +254,9 @@ Add billing to a customer profile
 
 **Parameters**
 
--   `customerId` **[string][57]** customer vault id
--   `returnUrl` **[string][57]** return url
--   `billing` **[Billing][72]** Billing schema
+-   `customerId` **[string][63]** customer vault id
+-   `returnUrl` **[string][63]** return url
+-   `billing` **[Billing][81]** Billing schema
 
 ### customer.updateBilling
 
@@ -227,8 +264,8 @@ Update billing for a customer profile
 
 **Parameters**
 
--   `customerId` **[string][57]** customer vault id
--   `billing` **[Billing][72]** Billing schema
+-   `customerId` **[string][63]** customer vault id
+-   `billing` **[Billing][81]** Billing schema
 
 ### customer.deleteBilling
 
@@ -236,8 +273,8 @@ Delete billing for a customer profile
 
 **Parameters**
 
--   `customerId` **[string][57]** customer vault id
--   `billingId` **[string][57]** billing id
+-   `customerId` **[string][63]** customer vault id
+-   `billingId` **[string][63]** billing id
 
 ## Plans
 
@@ -250,492 +287,696 @@ Create a plan
 
 **Parameters**
 
--   `plan` **[AddPlan][73]** plan object
-
-## BillingExtended
-
-Type: [Object][56]
-
-**Properties**
-
--   `billingId` **any** 
--   `firstName` **any** 
--   `lastName` **any** 
--   `address1` **any** 
--   `address2` **any** 
--   `city` **any** 
--   `state` **any** 
--   `postal` **any** 
--   `country` **any** 
--   `phone` **any** 
--   `email` **any** 
--   `company` **any** 
--   `fax` **any** 
--   `accountType` **any** 
--   `entityType` **any** 
--   `socialSecurityNumber` **any** 
--   `driversLicenseNumber` **any** 
--   `driversLicenseDob` **any** 
--   `driversLicenseState` **any** 
--   `ccNumber` **any** 
--   `ccExp` **any** 
--   `accountName` **any** 
--   `accountNumber` **any** 
--   `routingNumber` **any** 
--   `accountType` **any** 
--   `entityType` **any** 
--   `priority` **any** 
-
-## CaptureTransaction
-
-Type: [Object][56]
-
-**Properties**
-
--   `transactionId` **any** 
--   `amount` **any** 
--   `trackingNumber` **any** 
--   `shippingCarrier` **any** 
--   `orderId` **any** 
--   `signatureImage` **any** 
-
-## CompleteAction
-
-Type: [Object][56]
-
-**Properties**
-
--   `tokenId` **any** 
-
-## DeleteBilling
-
-Type: [Object][56]
-
-**Properties**
-
--   `customerVaultId` **any** 
-
-## DeleteCustomer
-
-Type: [Object][56]
-
-**Properties**
-
--   `customerVaultId` **any** 
-
-## DeleteSubscription
-
-Type: [Object][56]
-
-**Properties**
-
--   `subscriptionId` **any** 
-
-## CompletePartialPayment
-
-Type: [Object][56]
-
-**Properties**
-
--   `partialPaymentId` **any** 
-
-## Plan
-
-Type: [Object][56]
-
-**Properties**
-
--   `planId` **any** existing plan id, omit for new plans
--   `payments` **any** number of payments until completed (0 for unlimited)
--   `amount` **any** amount to be charged
--   `dayFrequency` **any** how often, in days, to bill customer
--   `monthFrequency` **any** how often, in months, to bill customer (1-24)
--   `dayOfMonth` **any** day of month to bill customer (1-31)
-
-## Product
-
-Type: [Object][56]
-
-**Properties**
-
--   `productCode` **any** 
--   `description` **any** 
--   `commodityCode` **any** 
--   `unitOfMeasure` **any** 
--   `unitCost` **any** 
--   `quantity` **any** 
--   `totalAmount` **any** 
--   `taxAmount` **any** 
--   `taxRate` **any** 
--   `discountAmount` **any** 
--   `discountRate` **any** 
--   `taxType` **any** 
--   `alternateTaxId` **any** 
-
-## RefundTransaction
-
-Type: [Object][56]
-
-**Properties**
-
--   `transactionId` **any** 
--   `amount` **any** 
-
-## Shipping
-
-Type: [Object][56]
-
-**Properties**
-
--   `shippingId` **any** 
--   `firstName` **any** 
--   `lastName` **any** 
--   `address1` **any** 
--   `city` **any** 
--   `state` **any** 
--   `postal` **any** 
--   `country` **any** 
--   `phone` **any** 
--   `email` **any** 
--   `company` **any** 
--   `address2` **any** 
--   `fax` **any** 
-
-## AddCustomer
-
-Type: [Object][56]
-
-**Properties**
-
--   `redirectUrl` **any** 
--   `customerVaultId` **any** 
--   `sourceTransactionId` **any** 
--   `billing` **[Billing][72]** 
--   `shipping` **[Shipping][74]** 
-
-## UpdateBilling
-
-Type: [Object][56]
-
-**Properties**
-
--   `redirectUrl` **any** 
--   `customerVaultId` **any** 
--   `billing` **[Billing][72]** 
-
-## UpdateCustomer
-
-Type: [Object][56]
-
-**Properties**
-
--   `redirectUrl` **any** 
--   `customerVaultId` **any** 
--   `sourceTransactionId` **any** 
--   `billing` **[Billing][72]** 
--   `shipping` **[Shipping][74]** 
-
-## UpdateSubscription
-
-Type: [Object][56]
-
-**Properties**
-
--   `redirectUrl` **any** 
--   `subscriptionId` **any** 
--   `customerVaultId` **any** 
--   `startDate` **any** YYYYMMDD
--   `orderId` **any** 
--   `poNumber` **any** 
--   `orderDescription` **any** 
--   `currency` **any** 
--   `taxAmount` **any** 
--   `shippingAmount` **any** 
--   `sourceTransactionId` **any** 
-
-## UpdateTransaction
-
-Type: [Object][56]
-
-**Properties**
-
--   `transactionId` **any** 
--   `trackingNumber` **any** 
--   `shippingCarrier` **any** 
--   `orderId` **any** 
--   `signatureImage` **any** 
-
-## VoidTransaction
-
-Type: [Object][56]
-
-**Properties**
-
--   `transactionId` **any** 
-
-## Query
-
-Type: [Object][56]
-
-**Properties**
-
--   `username` **any** account username
--   `password` **any** account password
--   `startDate` **any** YYYYMMDDhhmmss
--   `endDate` **any** YYYYMMDDhhmmss
--   `reportType` **any** 'receipt', 'customer_vault', 'recurring', 'gateway_processors', 'account_updater'
--   `mobileDeviceLicense` **any** a license id or 'any_mobile'
--   `mobildeDeviceNickname` **any** device nickname
--   `customerVaultId` **any** customer vault id, only used for `reportType`='customer_vault'
--   `dateSearch` **any** 'created', 'updated' or 'created,updated', used for customer_vault
--   `resultLimit` **any** limit
--   `pageNumber` **any** page
-
-## CreateTransactionResponse
-
-Type: [Object][56]
-
-**Properties**
-
--   `result` **any** 
--   `resultText` **any** 
--   `transactionId` **any** 
--   `resultCode` **any** 
--   `formUrl` **any** 
-
-## ExecuteTransactionResponse
-
-Type: [Object][56]
-
-**Properties**
-
--   `result` **any** 
--   `resultText` **any** 
--   `transactionId` **any** 
--   `resultCode` **any** 
--   `authorizationCode` **any** 
--   `avsResult` **any** 
--   `cvvResult` **any** 
--   `actionType` **any** 
--   `amount` **any** 
--   `amountAuthorized` **any** 
--   `ipAddress` **any** 
--   `industry` **any** 
--   `billingMethod` **any** 
--   `processorId` **any** 
--   `secCode` **any** 
--   `descriptor` **any** 
--   `descriptorPhone` **any** 
--   `descriptorAddress` **any** 
--   `descriptorCity` **any** 
--   `descriptorState` **any** 
--   `descriptorPostal` **any** 
--   `descriptorCountry` **any** 
--   `descriptorMcc` **any** 
--   `descriptorMerchantId` **any** 
--   `descriptorUrl` **any** 
--   `currency` **any** 
--   `orderDescription` **any** 
--   `customerId` **any** 
--   `customerVaultId` **any** 
--   `merchantReceiptEmail` **any** 
--   `customerReceipt` **any** 
--   `partialPaymentBalance` **any** 
--   `partialPaymentId` **any** 
--   `trackingNumber` **any** 
--   `shippingCarrier` **any** 
--   `orderId` **any** 
--   `poNumber` **any** 
--   `taxAmount` **any** 
--   `shippingAmount` **any** 
--   `shipFromPostal` **any** 
--   `summaryCommodityCode` **any** 
--   `dutyAmount` **any** 
--   `discountAmount` **any** 
--   `nationalTaxAmount` **any** 
--   `alternateTaxAmount` **any** 
--   `alternateTaxId` **any** 
--   `vatTaxAmount` **any** 
--   `vatTaxRate` **any** 
--   `vatInvoiceReferenceNumber` **any** 
--   `customerVatRegistration` **any** 
--   `merchantVatRegistration` **any** 
--   `orderDate` **any** 
--   `cardholderAuth` **any** 
--   `eci` **any** 
--   `cavv` **any** 
--   `xid` **any** 
--   `dupSeconds` **any** 
--   `avsReject` **any** 
--   `cvvReject` **any** 
--   `billing` **[Billing][72]** 
--   `shipping` **[Shipping][74]** 
--   `product` **[Array][75]&lt;[Product][76]>** 
-
-## CreateSubscriptionResponse
-
-Type: [Object][56]
-
-**Properties**
-
--   `result` **any** 
--   `resultText` **any** 
--   `subscriptionId` **any** 
--   `resultCode` **any** 
--   `formUrl` **any** 
-
-## ExecuteSubscriptionResponse
-
-Type: [Object][56]
-
-**Properties**
-
--   `result` **any** 
--   `resultText` **any** 
--   `resultCode` **any** 
--   `actionType` **any** 
--   `subscriptionId` **any** 
--   `plan` **[Plan][77]** 
--   `billing` **[Billing][72]** 
--   `shipping` **[Shipping][74]** 
-
-## ExecuteCustomerResponse
-
-Type: [Object][56]
-
-**Properties**
-
--   `result` **any** 
--   `resultText` **any** 
--   `resultCode` **any** 
--   `actionType` **any** 
--   `customerVaultId` **any** 
--   `billing` **[BillingExtended][78]** 
--   `shipping` **[Shipping][74]** 
-
-## AddBilling
-
-Type: [Object][56]
-
-**Properties**
-
--   `redirectUrl` **any** 
--   `customerVaultId` **any** 
--   `billing` **[Billing][72]** 
-
-## AddPlan
-
-Type: [Object][56]
-
-**Properties**
-
--   `name` **any** 
--   `planId` **any** 
--   `payments` **any** 
--   `amount` **any** 
--   `dayFrequency` **any** 
--   `monthFrequency` **any** 
--   `dayOfMonth` **any** 
-
-## AddSubscription
-
-Type: [Object][56]
-
-**Properties**
-
--   `customerVaultId` **any** customer vault id
--   `startDate` **any** YYYYMMDD format
--   `amount` **any** charge amount
--   `orderId` **any** 
--   `poNumber` **any** 
--   `orderDescription` **any** 
--   `currency` **any** 
--   `taxAmount` **any** 
--   `shippingAmount` **any** 
--   `sourceTransactionId` **any** 
--   `billing` **[Billing][72]** 
--   `shipping` **[Shipping][74]** 
+-   `plan` **[AddPlan][82]** plan object
 
 ## Billing
 
-Type: [Object][56]
+Type: [Object][62]
 
 **Properties**
 
--   `billingId` **any** 
--   `firstName` **any** 
--   `lastName` **any** 
--   `address1` **any** 
--   `address2` **any** 
--   `city` **any** 
--   `state` **any** 
--   `postal` **any** 
--   `country` **any** 
--   `phone` **any** 
--   `email` **any** 
--   `company` **any** 
--   `fax` **any** 
--   `accountType` **any** 
--   `entityType` **any** 
+-   `billingId` **[string][63]** 
+-   `firstName` **[string][63]** 
+-   `lastName` **[string][63]** 
+-   `address1` **[string][63]** 
+-   `address2` **[string][63]** 
+-   `city` **[string][63]** 
+-   `state` **[string][63]** 
+-   `postal` **[string][63]** 
+-   `country` **[string][63]** 
+-   `phone` **[string][63]** 
+-   `email` **[string][63]** 
+-   `company` **[string][63]** 
+-   `fax` **[string][63]** 
+-   `accountType` **[string][63]** 
+-   `entityType` **[string][63]** 
+
+## BillingExtended
+
+Type: [Object][62]
+
+**Properties**
+
+-   `billingId` **[string][63]** 
+-   `firstName` **[string][63]** 
+-   `lastName` **[string][63]** 
+-   `address1` **[string][63]** 
+-   `address2` **[string][63]** 
+-   `city` **[string][63]** 
+-   `state` **[string][63]** 
+-   `postal` **[string][63]** 
+-   `country` **[string][63]** 
+-   `phone` **[string][63]** 
+-   `email` **[string][63]** 
+-   `company` **[string][63]** 
+-   `fax` **[string][63]** 
+-   `accountType` **[string][63]** 
+-   `entityType` **[string][63]** 
+-   `socialSecurityNumber` **[string][63]** 
+-   `driversLicenseNumber` **[string][63]** 
+-   `driversLicenseDob` **[string][63]** 
+-   `driversLicenseState` **[string][63]** 
+-   `ccNumber` **[string][63]** 
+-   `ccExp` **[string][63]** 
+-   `accountName` **[string][63]** 
+-   `accountNumber` **[string][63]** 
+-   `routingNumber` **[string][63]** 
+-   `accountType` **[string][63]** 
+-   `entityType` **[string][63]** 
+-   `priority` **[string][63]** 
+
+## CaptureTransaction
+
+Type: [Object][62]
+
+**Properties**
+
+-   `transactionId` **[string][63]** 
+-   `amount` **[string][63]** 
+-   `trackingNumber` **[string][63]** 
+-   `shippingCarrier` **[string][63]** 
+-   `orderId` **[string][63]** 
+-   `signatureImage` **[string][63]** 
+
+## CompleteAction
+
+Type: [Object][62]
+
+**Properties**
+
+-   `tokenId` **[string][63]** 
+
+## DeleteBilling
+
+Type: [Object][62]
+
+**Properties**
+
+-   `customerVaultId` **[string][63]** 
+
+## DeleteCustomer
+
+Type: [Object][62]
+
+**Properties**
+
+-   `customerVaultId` **[string][63]** 
+
+## DeleteSubscription
+
+Type: [Object][62]
+
+**Properties**
+
+-   `subscriptionId` **[string][63]** 
+
+## CompletePartialPayment
+
+Type: [Object][62]
+
+**Properties**
+
+-   `partialPaymentId` **[string][63]** 
+
+## Plan
+
+Type: [Object][62]
+
+**Properties**
+
+-   `planId` **[string][63]** existing plan id, omit for new plans
+-   `payments` **[string][63]** number of payments until completed (0 for unlimited)
+-   `amount` **[string][63]** amount to be charged
+-   `dayFrequency` **[string][63]** how often, in days, to bill customer
+-   `monthFrequency` **[string][63]** how often, in months, to bill customer (1-24)
+-   `dayOfMonth` **[string][63]** day of month to bill customer (1-31)
+
+## Product
+
+Type: [Object][62]
+
+**Properties**
+
+-   `productCode` **[string][63]** 
+-   `description` **[string][63]** 
+-   `commodityCode` **[string][63]** 
+-   `unitOfMeasure` **[string][63]** 
+-   `unitCost` **[string][63]** 
+-   `quantity` **[string][63]** 
+-   `totalAmount` **[string][63]** 
+-   `taxAmount` **[string][63]** 
+-   `taxRate` **[string][63]** 
+-   `discountAmount` **[string][63]** 
+-   `discountRate` **[string][63]** 
+-   `taxType` **[string][63]** 
+-   `alternateTaxId` **[string][63]** 
+
+## RefundTransaction
+
+Type: [Object][62]
+
+**Properties**
+
+-   `transactionId` **[string][63]** 
+-   `amount` **[string][63]** 
+
+## Shipping
+
+Type: [Object][62]
+
+**Properties**
+
+-   `shippingId` **[string][63]** 
+-   `firstName` **[string][63]** 
+-   `lastName` **[string][63]** 
+-   `address1` **[string][63]** 
+-   `city` **[string][63]** 
+-   `state` **[string][63]** 
+-   `postal` **[string][63]** 
+-   `country` **[string][63]** 
+-   `phone` **[string][63]** 
+-   `email` **[string][63]** 
+-   `company` **[string][63]** 
+-   `address2` **[string][63]** 
+-   `fax` **[string][63]** 
 
 ## Transaction
 
-Type: [Object][56]
+Type: [Object][62]
 
 **Properties**
 
--   `redirectUrl` **any** 
--   `amount` **any** 
--   `surchargeAmount` **any** 
--   `authorizationCode` **any** 
--   `ipAddress` **any** 
--   `industry` **any** 
--   `billingMethod` **any** 
--   `billingNumber` **any** 
--   `billingTotal` **any** 
--   `processorId` **any** 
--   `secCode` **any** 
--   `descriptor` **any** 
--   `descriptorPhone` **any** 
--   `descriptorAddress` **any** 
--   `descriptorCity` **any** 
--   `descriptorState` **any** 
--   `descriptorPostal` **any** 
--   `descriptorCountry` **any** 
--   `descriptorMcc` **any** 
--   `descriptorMerchantId` **any** 
--   `descriptorUrl` **any** 
--   `currency` **any** 
--   `orderDescription` **any** 
--   `customerId` **any** 
--   `customerVaultId` **any** 
--   `merchantReceiptEmail` **any** 
--   `customerReceipt` **any** 
--   `trackingNumber` **any** 
--   `shippingCarrier` **any** 
--   `orderId` **any** 
--   `signatureImage` **any** 
--   `poNumber` **any** 
--   `taxAmount` **any** 
--   `shippingAmount` **any** 
--   `shipFromPostal` **any** 
--   `summaryCommodityCode` **any** 
--   `dutyAmount` **any** 
--   `discountAmount` **any** 
--   `nationalTaxAmount` **any** 
--   `alternateTaxAmount` **any** 
--   `alternateTaxId` **any** 
--   `vatTaxAmount` **any** 
--   `vatTaxRate` **any** 
--   `vatInvoiceReferenceNumber` **any** 
--   `customerVatRegistration` **any** 
--   `merchantVatRegistration` **any** 
--   `orderDate` **any** 
--   `cardholderAuth` **any** 
--   `eci` **any** 
--   `cavv` **any** 
--   `xid` **any** 
--   `billing` **[Billing][72]** 
+-   `redirectUrl` **[string][63]** 
+-   `amount` **[string][63]** 
+-   `surchargeAmount` **[string][63]** 
+-   `authorizationCode` **[string][63]** 
+-   `ipAddress` **[string][63]** 
+-   `industry` **[string][63]** 
+-   `billingMethod` **[string][63]** 
+-   `billingNumber` **[string][63]** 
+-   `billingTotal` **[string][63]** 
+-   `processorId` **[string][63]** 
+-   `secCode` **[string][63]** 
+-   `descriptor` **[string][63]** 
+-   `descriptorPhone` **[string][63]** 
+-   `descriptorAddress` **[string][63]** 
+-   `descriptorCity` **[string][63]** 
+-   `descriptorState` **[string][63]** 
+-   `descriptorPostal` **[string][63]** 
+-   `descriptorCountry` **[string][63]** 
+-   `descriptorMcc` **[string][63]** 
+-   `descriptorMerchantId` **[string][63]** 
+-   `descriptorUrl` **[string][63]** 
+-   `currency` **[string][63]** 
+-   `orderDescription` **[string][63]** 
+-   `customerId` **[string][63]** 
+-   `customerVaultId` **[string][63]** 
+-   `merchantReceiptEmail` **[string][63]** 
+-   `customerReceipt` **[string][63]** 
+-   `trackingNumber` **[string][63]** 
+-   `shippingCarrier` **[string][63]** 
+-   `orderId` **[string][63]** 
+-   `signatureImage` **[string][63]** 
+-   `poNumber` **[string][63]** 
+-   `taxAmount` **[string][63]** 
+-   `shippingAmount` **[string][63]** 
+-   `shipFromPostal` **[string][63]** 
+-   `summaryCommodityCode` **[string][63]** 
+-   `dutyAmount` **[string][63]** 
+-   `discountAmount` **[string][63]** 
+-   `nationalTaxAmount` **[string][63]** 
+-   `alternateTaxAmount` **[string][63]** 
+-   `alternateTaxId` **[string][63]** 
+-   `vatTaxAmount` **[string][63]** 
+-   `vatTaxRate` **[string][63]** 
+-   `vatInvoiceReferenceNumber` **[string][63]** 
+-   `customerVatRegistration` **[string][63]** 
+-   `merchantVatRegistration` **[string][63]** 
+-   `orderDate` **[string][63]** 
+-   `cardholderAuth` **[string][63]** 
+-   `eci` **[string][63]** 
+-   `cavv` **[string][63]** 
+-   `xid` **[string][63]** 
+-   `billing` **[Billing][81]** 
+
+## AddCustomer
+
+Type: [Object][62]
+
+**Properties**
+
+-   `billing` **[Billing][81]** 
+-   `shipping` **[Shipping][83]** 
+-   `redirectUrl` **[string][63]** 
+-   `customerVaultId` **[string][63]** 
+-   `sourceTransactionId` **[string][63]** 
+
+## UpdateCustomer
+
+Type: [Object][62]
+
+**Properties**
+
+-   `redirectUrl` **[string][63]** 
+-   `customerVaultId` **[string][63]** 
+-   `sourceTransactionId` **[string][63]** 
+-   `billing` **[Billing][81]** 
+-   `shipping` **[Shipping][83]** 
+
+## UpdateSubscription
+
+Type: [Object][62]
+
+**Properties**
+
+-   `redirectUrl` **[string][63]** 
+-   `subscriptionId` **[string][63]** 
+-   `customerVaultId` **[string][63]** 
+-   `startDate` **[string][63]** YYYYMMDD
+-   `orderId` **[string][63]** 
+-   `poNumber` **[string][63]** 
+-   `orderDescription` **[string][63]** 
+-   `currency` **[string][63]** 
+-   `taxAmount` **[string][63]** 
+-   `shippingAmount` **[string][63]** 
+-   `sourceTransactionId` **[string][63]** 
+
+## UpdateTransaction
+
+Type: [Object][62]
+
+**Properties**
+
+-   `transactionId` **[string][63]** 
+-   `trackingNumber` **[string][63]** 
+-   `shippingCarrier` **[string][63]** 
+-   `orderId` **[string][63]** 
+-   `signatureImage` **[string][63]** 
+
+## VoidTransaction
+
+Type: [Object][62]
+
+**Properties**
+
+-   `transactionId` **[string][63]** 
+
+## Query
+
+Type: [Object][62]
+
+**Properties**
+
+-   `username` **[string][63]** account username
+-   `password` **[string][63]** account password
+-   `startDate` **[string][63]** YYYYMMDDhhmmss
+-   `endDate` **[string][63]** YYYYMMDDhhmmss
+-   `reportType` **[string][63]** 'receipt', 'customer_vault', 'recurring', 'gateway_processors', 'account_updater'
+-   `mobileDeviceLicense` **[string][63]** a license id or 'any_mobile'
+-   `mobildeDeviceNickname` **[string][63]** device nickname
+-   `customerVaultId` **[string][63]** customer vault id, only used for `reportType`='customer_vault'
+-   `dateSearch` **[string][63]** 'created', 'updated' or 'created,updated', used for customer_vault
+-   `resultLimit` **[string][63]** limit
+-   `pageNumber` **[string][63]** page
+
+## CreateTransactionResponse
+
+Type: [Object][62]
+
+**Properties**
+
+-   `result` **[string][63]** 
+-   `resultText` **[string][63]** 
+-   `transactionId` **[string][63]** 
+-   `resultCode` **[string][63]** 
+-   `formUrl` **[string][63]** 
+
+## ExecuteTransactionResponse
+
+Type: [Object][62]
+
+**Properties**
+
+-   `result` **[string][63]** 
+-   `resultText` **[string][63]** 
+-   `transactionId` **[string][63]** 
+-   `resultCode` **[string][63]** 
+-   `authorizationCode` **[string][63]** 
+-   `avsResult` **[string][63]** 
+-   `cvvResult` **[string][63]** 
+-   `actionType` **[string][63]** 
+-   `amount` **[string][63]** 
+-   `amountAuthorized` **[string][63]** 
+-   `ipAddress` **[string][63]** 
+-   `industry` **[string][63]** 
+-   `billingMethod` **[string][63]** 
+-   `processorId` **[string][63]** 
+-   `secCode` **[string][63]** 
+-   `descriptor` **[string][63]** 
+-   `descriptorPhone` **[string][63]** 
+-   `descriptorAddress` **[string][63]** 
+-   `descriptorCity` **[string][63]** 
+-   `descriptorState` **[string][63]** 
+-   `descriptorPostal` **[string][63]** 
+-   `descriptorCountry` **[string][63]** 
+-   `descriptorMcc` **[string][63]** 
+-   `descriptorMerchantId` **[string][63]** 
+-   `descriptorUrl` **[string][63]** 
+-   `currency` **[string][63]** 
+-   `orderDescription` **[string][63]** 
+-   `customerId` **[string][63]** 
+-   `customerVaultId` **[string][63]** 
+-   `merchantReceiptEmail` **[string][63]** 
+-   `customerReceipt` **[string][63]** 
+-   `partialPaymentBalance` **[string][63]** 
+-   `partialPaymentId` **[string][63]** 
+-   `trackingNumber` **[string][63]** 
+-   `shippingCarrier` **[string][63]** 
+-   `orderId` **[string][63]** 
+-   `poNumber` **[string][63]** 
+-   `taxAmount` **[string][63]** 
+-   `shippingAmount` **[string][63]** 
+-   `shipFromPostal` **[string][63]** 
+-   `summaryCommodityCode` **[string][63]** 
+-   `dutyAmount` **[string][63]** 
+-   `discountAmount` **[string][63]** 
+-   `nationalTaxAmount` **[string][63]** 
+-   `alternateTaxAmount` **[string][63]** 
+-   `alternateTaxId` **[string][63]** 
+-   `vatTaxAmount` **[string][63]** 
+-   `vatTaxRate` **[string][63]** 
+-   `vatInvoiceReferenceNumber` **[string][63]** 
+-   `customerVatRegistration` **[string][63]** 
+-   `merchantVatRegistration` **[string][63]** 
+-   `orderDate` **[string][63]** 
+-   `cardholderAuth` **[string][63]** 
+-   `eci` **[string][63]** 
+-   `cavv` **[string][63]** 
+-   `xid` **[string][63]** 
+-   `dupSeconds` **[string][63]** 
+-   `avsReject` **[string][63]** 
+-   `cvvReject` **[string][63]** 
+-   `billing` **[Billing][81]** 
+-   `shipping` **[Shipping][83]** 
+-   `product` **[Array][84]&lt;[Product][85]>** 
+
+## CreateSubscriptionResponse
+
+Type: [Object][62]
+
+**Properties**
+
+-   `result` **[string][63]** 
+-   `resultText` **[string][63]** 
+-   `subscriptionId` **[string][63]** 
+-   `resultCode` **[string][63]** 
+-   `formUrl` **[string][63]** 
+
+## ExecuteSubscriptionResponse
+
+Type: [Object][62]
+
+**Properties**
+
+-   `result` **[string][63]** 
+-   `resultText` **[string][63]** 
+-   `resultCode` **[string][63]** 
+-   `actionType` **[string][63]** 
+-   `subscriptionId` **[string][63]** 
+-   `plan` **[Plan][86]** 
+-   `billing` **[Billing][81]** 
+-   `shipping` **[Shipping][83]** 
+
+## ExecuteCustomerResponse
+
+Type: [Object][62]
+
+**Properties**
+
+-   `result` **[string][63]** 
+-   `resultText` **[string][63]** 
+-   `resultCode` **[string][63]** 
+-   `actionType` **[string][63]** 
+-   `customerVaultId` **[string][63]** 
+-   `billing` **[BillingExtended][87]** 
+-   `shipping` **[Shipping][83]** 
+
+## GetTransactionResponse
+
+Type: [Object][62]
+
+**Properties**
+
+-   `ransactionId` **[string][63]** 
+-   `partialPaymentId` **[string][63]** 
+-   `partialPaymentBalance` **[string][63]** 
+-   `platformId` **[string][63]** 
+-   `transactionType` **[string][63]** 
+-   `condition` **[string][63]** 
+-   `orderId` **[string][63]** 
+-   `authorizationCode` **[string][63]** 
+-   `ponumber` **[string][63]** 
+-   `orderDescription` **[string][63]** 
+-   `firstName` **[string][63]** 
+-   `lastName` **[string][63]** 
+-   `address_1` **[string][63]** 
+-   `address1` **[string][63]** alias
+-   `address_2` **[string][63]** 
+-   `address2` **[string][63]** alias
+-   `company` **[string][63]** 
+-   `cite` **[string][63]** 
+-   `state` **[string][63]** 
+-   `postalCode` **[string][63]** 
+-   `postal` **[string][63]** alias
+-   `country` **[string][63]** 
+-   `email` **[string][63]** 
+-   `phone` **[string][63]** 
+-   `fax` **[string][63]** 
+-   `cellPhone` **[string][63]** 
+-   `customertaxid` **[string][63]** 
+-   `customerid` **[string][63]** 
+-   `website` **[string][63]** 
+-   `shippingFirstName` **[string][63]** 
+-   `shippingLastName` **[string][63]** 
+-   `shippingAddress_1` **[string][63]** 
+-   `shippingAddress_2` **[string][63]** 
+-   `shippingCompany` **[string][63]** 
+-   `shippingCity` **[string][63]** 
+-   `shippingState` **[string][63]** 
+-   `shippingPostalCode` **[string][63]** 
+-   `shippingCountry` **[string][63]** 
+-   `shippingEmail` **[string][63]** 
+-   `shippingCarrier` **[string][63]** 
+-   `trackingNumber` **[string][63]** 
+-   `shippingDate` **[string][63]** 
+-   `shipping` **[string][63]** 
+-   `shippingPhone` **[string][63]** 
+-   `ccNumber` **[string][63]** 
+-   `ccHash` **[string][63]** 
+-   `ccExp` **[string][63]** 
+-   `cavv` **[string][63]** 
+-   `cavvResult` **[string][63]** 
+-   `xid` **[string][63]** 
+-   `eci` **[string][63]** 
+-   `avsResponse` **[string][63]** 
+-   `cscResponse` **[string][63]** 
+-   `cardholderAuth` **[string][63]** 
+-   `ccStartDate` **[string][63]** 
+-   `ccIssueNumber` **[string][63]** 
+-   `checkAccount` **[string][63]** 
+-   `checkHash` **[string][63]** 
+-   `checkAba` **[string][63]** 
+-   `checkName` **[string][63]** 
+-   `accountHolderType` **[string][63]** 
+-   `accountType` **[string][63]** 
+-   `secCode` **[string][63]** 
+-   `driversLicenseNumber` **[string][63]** 
+-   `driversLicenseState` **[string][63]** 
+-   `driversLicenseDob` **[string][63]** 
+-   `socialSecurityNumber` **[string][63]** 
+-   `processorId` **[string][63]** 
+-   `tax` **[string][63]** 
+-   `currency` **[string][63]** 
+-   `surcharge` **[string][63]** 
+-   `tip` **[string][63]** 
+-   `cardBalance` **[string][63]** 
+-   `cardAvailableBalance` **[string][63]** 
+-   `entryMode` **[string][63]** 
+-   `ccBin` **[string][63]** 
+-   `ccType` **[string][63]** 
+-   `action` **[Object][62]** 
+    -   `action.amount` **[string][63]** 
+    -   `action.actionType` **[string][63]** 
+    -   `action.date` **[string][63]** 
+    -   `action.success` **[string][63]** 
+    -   `action.ipAddress` **[string][63]** 
+    -   `action.source` **[string][63]** 
+    -   `action.username` **[string][63]** 
+    -   `action.responseText` **[string][63]** 
+    -   `action.batchId` **[string][63]** 
+    -   `action.processorBatchId` **[string][63]** 
+    -   `action.responseCode` **[string][63]** 
+    -   `action.processorResponseText` **[string][63]** 
+    -   `action.processorResponseCode` **[string][63]** 
+    -   `action.deviceLicenseNumber` **[string][63]** 
+    -   `action.deviceNickname` **[string][63]** 
+
+## GetCustomerResponse
+
+Type: [Object][62]
+
+**Properties**
+
+-   `id` **[string][63]** 
+-   `firstName` **[string][63]** 
+-   `lastName` **[string][63]** 
+-   `address_1` **[string][63]** 
+-   `address1` **[string][63]** 
+-   `address_2` **[string][63]** 
+-   `address2` **[string][63]** 
+-   `company` **[string][63]** 
+-   `city` **[string][63]** 
+-   `state` **[string][63]** 
+-   `postalCode` **[string][63]** 
+-   `postal` **[string][63]** 
+-   `country` **[string][63]** 
+-   `email` **[string][63]** 
+-   `phone` **[string][63]** 
+-   `fax` **[string][63]** 
+-   `cellPhone` **[string][63]** 
+-   `customertaxid` **[string][63]** 
+-   `website` **[string][63]** 
+-   `shippingFirstName` **[string][63]** 
+-   `shippingLastName` **[string][63]** 
+-   `shippingAddress_1` **[string][63]** 
+-   `shippingAddress_2` **[string][63]** 
+-   `shippingCompany` **[string][63]** 
+-   `shippingCity` **[string][63]** 
+-   `shippingState` **[string][63]** 
+-   `shippingPostalCode` **[string][63]** 
+-   `shippingCountry` **[string][63]** 
+-   `shippingEmail` **[string][63]** 
+-   `shippingCarrier` **[string][63]** 
+-   `trackingNumber` **[string][63]** 
+-   `shippingDate` **[string][63]** 
+-   `shipping` **[string][63]** 
+-   `ccNumber` **[string][63]** 
+-   `ccHash` **[string][63]** 
+-   `ccExp` **[string][63]** 
+-   `ccStartDate` **[string][63]** 
+-   `ccIssueNumber` **[string][63]** 
+-   `checkAccount` **[string][63]** 
+-   `checkHash` **[string][63]** 
+-   `checkAba` **[string][63]** 
+-   `checkName` **[string][63]** 
+-   `accountHolderType` **[string][63]** 
+-   `accountType` **[string][63]** 
+-   `secCode` **[string][63]** 
+-   `processorId` **[string][63]** 
+-   `ccBin` **[string][63]** 
+-   `created` **[string][63]** 
+-   `updated` **[string][63]** 
+-   `accountUpdated` **[string][63]** 
+-   `customerVaultId` **[string][63]** 
+
+## GetSubscriptionResponse
+
+Type: [Object][62]
+
+**Properties**
+
+-   `id` **[string][63]** 
+-   `subscriptionId` **[string][63]** 
+-   `planId` **[string][63]** 
+-   `nextChargeDate` **[string][63]** 
+-   `completedPayments` **[string][63]** 
+-   `attemptedPayments` **[string][63]** 
+-   `remainingPayments` **[string][63]** 
+-   `ponumber` **[string][63]** 
+-   `orderid` **[string][63]** 
+-   `order_id` **[string][63]** 
+-   `orderDescription` **[string][63]** 
+-   `shipping` **[string][63]** 
+-   `tax` **[string][63]** 
+-   `firstName` **[string][63]** 
+-   `lastName` **[string][63]** 
+-   `address_1` **[string][63]** 
+-   `address1` **[string][63]** 
+-   `address_2` **[string][63]** 
+-   `address2` **[string][63]** 
+-   `company` **[string][63]** 
+-   `city` **[string][63]** 
+-   `state` **[string][63]** 
+-   `postalCode` **[string][63]** 
+-   `postal` **[string][63]** 
+-   `country` **[string][63]** 
+-   `email` **[string][63]** 
+-   `phone` **[string][63]** 
+-   `fax` **[string][63]** 
+-   `cellPhone` **[string][63]** 
+-   `customertaxid` **[string][63]** 
+-   `website` **[string][63]** 
+-   `ccNumber` **[string][63]** 
+-   `ccHash` **[string][63]** 
+-   `ccExp` **[string][63]** 
+-   `ccStartDate` **[string][63]** 
+-   `ccIssueNumber` **[string][63]** 
+-   `ccBin` **[string][63]** 
+-   `processorId` **[string][63]** 
+
+## AddBilling
+
+Type: [Object][62]
+
+**Properties**
+
+-   `billing` **[Billing][81]** 
+-   `redirectUrl` **[string][63]** 
+-   `customerVaultId` **[string][63]** 
+
+## AddPlan
+
+Type: [Object][62]
+
+**Properties**
+
+-   `name` **[string][63]** 
+-   `planId` **[string][63]** 
+-   `payments` **[string][63]** 
+-   `amount` **[string][63]** 
+-   `dayFrequency` **[string][63]** 
+-   `monthFrequency` **[string][63]** 
+-   `dayOfMonth` **[string][63]** 
+
+## AddSubscription
+
+Type: [Object][62]
+
+**Properties**
+
+-   `billing` **[Billing][81]** 
+-   `shipping` **[Shipping][83]** 
+-   `plan` **[Plan][86]** 
+-   `customerVaultId` **[string][63]** customer vault id
+-   `startDate` **[string][63]** "YYYYMMDD format
+-   `amount` **[string][63]** charge amount
+-   `orderId` **[string][63]** 
+-   `poNumber` **[string][63]** 
+-   `orderDescription` **[string][63]** 
+-   `currency` **[string][63]** 
+-   `taxAmount` **[string][63]** 
+-   `shippingAmount` **[string][63]** 
+-   `sourceTransactionId` **[string][63]** 
+
+## UpdateBilling
+
+Type: [Object][62]
+
+**Properties**
+
+-   `redirectUrl` **[string][63]** 
+-   `customerVaultId` **[string][63]** 
+-   `billing` **[Billing][81]** 
 
 [1]: #nmi
 
@@ -747,148 +988,166 @@ Type: [Object][56]
 
 [5]: #transactions
 
-[6]: #transactioncreate
+[6]: #transactionget
 
-[7]: #transactionexecute
+[7]: #transactioncreate
 
-[8]: #transactionupdate
+[8]: #transactionexecute
 
-[9]: #transactioncapture
+[9]: #transactionupdate
 
-[10]: #transactionvoid
+[10]: #transactioncapture
 
-[11]: #transactionrefund
+[11]: #transactionvoid
 
-[12]: #transactioncompletepartialpayment
+[12]: #transactionrefund
 
-[13]: #subscriptions
+[13]: #transactioncompletepartialpayment
 
-[14]: #subscriptioncreate
+[14]: #subscriptions
 
-[15]: #subscriptionexecute
+[15]: #subscriptionget
 
-[16]: #subscriptionupdate
+[16]: #subscriptioncreate
 
-[17]: #subscriptiondelete
+[17]: #subscriptionexecute
 
-[18]: #customers
+[18]: #subscriptionupdate
 
-[19]: #customercreate
+[19]: #subscriptiondelete
 
-[20]: #customerexecute
+[20]: #customers
 
-[21]: #customerupdate
+[21]: #customerget
 
-[22]: #customerdelete
+[22]: #customercreate
 
-[23]: #customeraddbilling
+[23]: #customerexecute
 
-[24]: #customerupdatebilling
+[24]: #customerupdate
 
-[25]: #customerdeletebilling
+[25]: #customerdelete
 
-[26]: #plans
+[26]: #customeraddbilling
 
-[27]: #plancreate
+[27]: #customerupdatebilling
 
-[28]: #billingextended
+[28]: #customerdeletebilling
 
-[29]: #capturetransaction
+[29]: #plans
 
-[30]: #completeaction
+[30]: #plancreate
 
-[31]: #deletebilling
+[31]: #billing
 
-[32]: #deletecustomer
+[32]: #billingextended
 
-[33]: #deletesubscription
+[33]: #capturetransaction
 
-[34]: #completepartialpayment
+[34]: #completeaction
 
-[35]: #plan
+[35]: #deletebilling
 
-[36]: #product
+[36]: #deletecustomer
 
-[37]: #refundtransaction
+[37]: #deletesubscription
 
-[38]: #shipping
+[38]: #completepartialpayment
 
-[39]: #addcustomer
+[39]: #plan
 
-[40]: #updatebilling
+[40]: #product
 
-[41]: #updatecustomer
+[41]: #refundtransaction
 
-[42]: #updatesubscription
+[42]: #shipping
 
-[43]: #updatetransaction
+[43]: #transaction
 
-[44]: #voidtransaction
+[44]: #addcustomer
 
-[45]: #query-1
+[45]: #updatecustomer
 
-[46]: #createtransactionresponse
+[46]: #updatesubscription
 
-[47]: #executetransactionresponse
+[47]: #updatetransaction
 
-[48]: #createsubscriptionresponse
+[48]: #voidtransaction
 
-[49]: #executesubscriptionresponse
+[49]: #query-1
 
-[50]: #executecustomerresponse
+[50]: #createtransactionresponse
 
-[51]: #addbilling
+[51]: #executetransactionresponse
 
-[52]: #addplan
+[52]: #createsubscriptionresponse
 
-[53]: #addsubscription
+[53]: #executesubscriptionresponse
 
-[54]: #billing
+[54]: #executecustomerresponse
 
-[55]: #transaction
+[55]: #gettransactionresponse
 
-[56]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[56]: #getcustomerresponse
 
-[57]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[57]: #getsubscriptionresponse
 
-[58]: #query
+[58]: #addbilling
 
-[59]: #transaction
+[59]: #addplan
 
-[60]: #createtransactionresponse
+[60]: #addsubscription
 
-[61]: #executetransactionresponse
+[61]: #updatebilling
 
-[62]: #updatetransaction
+[62]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[63]: #capturetransaction
+[63]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[64]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[64]: #query
 
-[65]: #addsubscription
+[65]: #gettransactionresponse
 
-[66]: #createsubscriptionresponse
+[66]: #transaction
 
-[67]: #executesubscriptionresponse
+[67]: #createtransactionresponse
 
-[68]: #updatesubscription
+[68]: #executetransactionresponse
 
-[69]: #addcustomer
+[69]: #updatetransaction
 
-[70]: #executecustomerresponse
+[70]: #capturetransaction
 
-[71]: #updatecustomer
+[71]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[72]: #billing
+[72]: #getsubscriptionresponse
 
-[73]: #addplan
+[73]: #addsubscription
 
-[74]: #shipping
+[74]: #createsubscriptionresponse
 
-[75]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[75]: #executesubscriptionresponse
 
-[76]: #product
+[76]: #updatesubscription
 
-[77]: #plan
+[77]: #getcustomerresponse
 
-[78]: #billingextended
+[78]: #addcustomer
+
+[79]: #executecustomerresponse
+
+[80]: #updatecustomer
+
+[81]: #billing
+
+[82]: #addplan
+
+[83]: #shipping
+
+[84]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[85]: #product
+
+[86]: #plan
+
+[87]: #billingextended
