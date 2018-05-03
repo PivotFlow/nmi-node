@@ -9,7 +9,7 @@ npm install nmi-node
 
 [Module documentation](docs.md)
 
-[NMI Three Step Redirect API docs](https://secure.networkmerchants.com/gw/merchants/resources/integration/integration_portal.php#3step_methodology). 
+[NMI Three Step Redirect API docs](https://secure.networkmerchants.com/gw/merchants/resources/integration/integration_portal.php#3step_methodology)
 
 # Notes
 
