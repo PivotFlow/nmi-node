@@ -32,6 +32,37 @@
     -   [customer.deleteBilling][28]
 -   [Plans][29]
     -   [plan.create][30]
+-   [Billing][31]
+-   [BillingExtended][32]
+-   [CaptureTransaction][33]
+-   [CompleteAction][34]
+-   [DeleteBilling][35]
+-   [DeleteCustomer][36]
+-   [DeleteSubscription][37]
+-   [CompletePartialPayment][38]
+-   [Plan][39]
+-   [Product][40]
+-   [RefundTransaction][41]
+-   [Shipping][42]
+-   [Transaction][43]
+-   [AddCustomer][44]
+-   [UpdateCustomer][45]
+-   [UpdateSubscription][46]
+-   [UpdateTransaction][47]
+-   [VoidTransaction][48]
+-   [Query][49]
+-   [CreateTransactionResponse][50]
+-   [ExecuteTransactionResponse][51]
+-   [CreateSubscriptionResponse][52]
+-   [ExecuteSubscriptionResponse][53]
+-   [ExecuteCustomerResponse][54]
+-   [GetTransactionResponse][55]
+-   [GetCustomerResponse][56]
+-   [GetSubscriptionResponse][57]
+-   [AddBilling][58]
+-   [AddPlan][59]
+-   [AddSubscription][60]
+-   [UpdateBilling][61]
 
 ## NMI
 
@@ -255,7 +286,7 @@ Add billing to a customer profile
 **Parameters**
 
 -   `customerId` **[string][63]** customer vault id
--   `returnUrl` **[string][63]** return url
+-   `redirectUrl` **[string][63]** redirect url
 -   `billing` **[Billing][81]** Billing schema
 
 ### customer.updateBilling
