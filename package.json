@@ -1,6 +1,6 @@
 {
   "name": "nmi-node",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Node SDK for Networking Merchants Inc's (NMI) Three Step Redirect API",
   "main": "index.js",
   "author": "",
@@ -8,7 +8,8 @@
   "dependencies": {
     "change-case": "^3.0.2",
     "request-promise": "^4.2.2",
-    "xml2json": "^0.11.2",
+    "xml-js": "^1.6.4",
+    "xml2js": "^0.4.19",
     "xmlbuilder": "^10.0.0"
   },
   "scripts": {
